@@ -1,7 +1,7 @@
+let basket = JSON.parse(localStorage.getItem("data")) || []
 const bar = document.getElementById("bar");
 const close = document.getElementById("close");
 const nav = document.getElementById("navbar");
-
 if (bar) {
     bar.addEventListener('click', () => {
         nav.classList.add('active');
@@ -18,7 +18,7 @@ let shop =document.getElementById('shop');
 
 
 
-let basket = JSON.parse(localStorage.getItem("data")) || []
+
 
 let generateShop = () => {
     return ( shop.innerHTML = shopItemsData
@@ -71,8 +71,8 @@ let decrement = (id)=>{
     let selectedItem = id;
     let search = basket.find((x) => x.id === selectedItem.id);
 
-    if(search === undefined) return;
-    else if( search. item === 0 ) return;
+    if(search===undefined)return
+    else if(search.item ===0) return;
     else{
         search.item -= 1;
     }

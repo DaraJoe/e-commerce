@@ -2,24 +2,20 @@ let label = document.getElementById("label");
 let shoppingCart = document.getElementById("shopping-cart");
     
 //let cartBasket = []
- let cartBasket = JSON.parse(localStorage.getItem("data")) || []
+ let basket = JSON.parse(localStorage.getItem("data")) || []
 
 
 let calculation = () => {
-    let cartIcons = document.querySelectorAll(".cartAmount");
-    const totalCartCount = cartBasket.map((x) => x.item).reduce((x, y) => x + y, 0);
-    console.log(`log`, cartIcons, `cart count`, totalCartCount);
-    cartIcons.forEach(cartIcon => {
-        cartIcon.innerHTML = totalCartCount;
-    })
- };
+    let cartIcons = document.getElementById("cartAmount");
+     cartIcons.innerHTML = basket.map((x) => x.item).reduce((x, y) => x + y, 0);
+        
+    };
  
  calculation();
 
  let generateCartItems =()=>{
-    if (cartBasket.length !== 0) {
- 
-        return (shoppingCart.innerHTML = cartBasket.map((x)=> {
+  if (basket.length !==0)
+  { return (shoppingCart.innerHTML = basket.map((x)=> {
            // console.log(x);
             let {id, item} = x;
             let search =shopItemsData.find((y)=> y.id === id )|| [];
@@ -49,10 +45,9 @@ let calculation = () => {
 
             </div>
             `;
-        })
-        .join("") );
+  }).join(""));
 
-    } else {
+ } else {
         // console.log("caart is totally empty")
         shoppingCart.innerHTML = ``;
         label.innerHTML =`
@@ -68,12 +63,12 @@ let calculation = () => {
 
  generateCartItems();
 
-/ let increment = (id)=>{
+let increment = (id)=>{
     let selectedItem = id;
-    let search = cartBasket.find((x) => x.id === selectedItem.id);
+    let search = basket.find((x) => x.id === selectedItem.id);
 
     if (search === undefined) {
-        cartBasket.push({
+        basket.push({
             id: selectedItem.id,
             item: 1,
         });
@@ -84,15 +79,15 @@ let calculation = () => {
    
 
     
-    localStorage.setItem("data", JSON.stringify(cartBasket));
+    localStorage.setItem("data", JSON.stringify(basket));
 
     generateCartItems();
 
     update (selectedItem.id)
-}; */
-/ let decrement = (id)=>{
+}; 
+let decrement = (id)=>{
     let selectedItem = id;
-    let search = cartBasket.find((x) => x.id === selectedItem.id);
+    let search = basket.find((x) => x.id === selectedItem.id);
 
     if(search === undefined) return;
     else if( search. item === 0 ) return;
@@ -106,11 +101,11 @@ let calculation = () => {
 
     generateCartItems();
 
-    localStorage.setItem("data", JSON.stringify(cartBasket));
+    localStorage.setItem("data", JSON.stringify(basket));
 };
 
 let update = (id)=>{
-    let search = cartBasket.find((x) => x.id === id)
+    let search = basket.find((x) => x.id === id)
     // console.log(search.item);
     document.getElementById(id).innerHTML =search.item;
     calculation();
@@ -121,26 +116,26 @@ let update = (id)=>{
 let removeItem = (id) => {
     let selectedItem = id;
 
-    cartBasket = cartBasket.filter((x)=>x.id !== selectedItem.id);
+   basket = basket.filter((x)=>x.id !== selectedItem.id);
 
     generateCartItems();
     TotalAmount();
     calculation();
-    localStorage.setItem("data", JSON.stringify(cartBasket));
+    localStorage.setItem("data", JSON.stringify(basket));
 
 };
 
 let clearCart =()=> {
-    cartBasket=[];
+    basket=[];
     generateCartItems();
     calculation();
-    localStorage.setItem("data", JSON.stringify(cartBasket));
+    localStorage.setItem("data", JSON.stringify(basket));
 
 };
 
 let TotalAmount = ()=>{
-    if (cartBasket.length !==0) {
-        let amount = cartBasket.map((x)=> {
+    if (basket.length !==0) {
+        let amount = basket.map((x)=> {
             let{item, id} =x;
             let search =shopItemsData.find((y)=> y.id === id )|| [];
 
@@ -157,4 +152,3 @@ let TotalAmount = ()=>{
 };
 
 TotalAmount();
-*/

@@ -82,6 +82,7 @@ body {
     position: sticky;
     top: 0;
     left: 0;
+    z-index: 99;
 
 }
 
@@ -512,6 +513,7 @@ margin: 30px auto 0 auto;
     }
 
     #mobile {
+        visibility: initial;
         display: flex;
         align-items: center;
         gap: 20px;  
@@ -533,9 +535,7 @@ margin: 30px auto 0 auto;
         font-size: 24px;
     }
 
-    #lg-cart {
-        display: none;
-    }
+    
 
     #mg1 {
         z-index: -1;
